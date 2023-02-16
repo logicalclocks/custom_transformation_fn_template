@@ -14,29 +14,31 @@
 #   limitations under the License.
 #
 
-import os
+import numpy as np
+
 
 def min_max_scaler(value, min_value, max_value):
     if value is None:
         return None
-    elif max_value - min_value == 0:
-        return 0
+    elif np.float64(max_value - min_value) == np.float64(0):
+        return np.float64(0)
     else:
-        return (value - min_value) / (max_value - min_value)
+        return np.float64((value - min_value) / (max_value - min_value))
+
 
 def standard_scaler(value, mean, std_dev):
     if value is None:
         return None
-    elif std_dev == 0:
-        return 0
+    elif np.float64(std_dev) == np.float64(0):
+        return np.float64(0)
     else:
-        return (value - mean) / std_dev
+        return np.float64((value - mean) / std_dev)
 
 
 def robust_scaler(value, p25, p50, p75):
     if value is None:
         return None
-    elif p75 - p25 == 0:
-        return 0
+    elif np.float64(p75 - p25) == np.float64(0):
+        return np.float64(0)
     else:
-        return (value - p50) / (p75 - p25)
+        return np.float64((value - p50) / (p75 - p25))
